@@ -1,0 +1,42 @@
+.category-tabs {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  background-color: transparent;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.category-icon {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: #ff5a5f;
+}
+
+.tab-button:hover {
+  background-color: #f7f7f7;
+}
+
+.tab-button.active {
+  color: white;
+  background-color: #ff5a5f;
+}
+
+.tab-button.active .category-icon {
+  color: white;
+}

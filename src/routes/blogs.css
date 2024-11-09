@@ -1,0 +1,11 @@
+.blogs-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.blogs-page h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
