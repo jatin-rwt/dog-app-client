@@ -7,11 +7,14 @@ import Blogs from "../component/Blogs";
 import { useNavigate } from "react-router-dom";
 import NewBlogCreation from "../component/NewBlogCreation";
 import { BASE_URL } from "../common";
+import { useDispatch, useSelector } from "react-redux";
+import { setBlogs } from "../store/slices/blogSlices";
 
 const BlogsPage = () => {
   // Sample categories and blog
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { blogs } = useSelector((state) => state.blogSlices);
   const userName = localStorage.getItem("name") ?? "Guest";
 
   const categories = [
@@ -39,7 +42,7 @@ const BlogsPage = () => {
   ];
 
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-  const [blogs, setBlogs] = useState([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFetchBlogsByCategory = async (category) => {
@@ -51,7 +54,7 @@ const BlogsPage = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        setBlogs(data.data);
+        dispatch(setBlogs(data.data));
       } else if (response.status === 401) {
         localStorage.removeItem("token");
         navigate("/login");
@@ -77,11 +80,7 @@ const BlogsPage = () => {
           </button>
 
           <div className="user-info">
-            <div
-              // Default profile picture if not available
-              alt="Profile"
-              className="profile-icon"
-            >
+            <div alt="Profile" className="profile-icon">
               {userName.split("")[0]?.toUpperCase()}
             </div>
             <span className="user-name">{userName}</span>

@@ -9,7 +9,6 @@ const Blog = () => {
   const location = useLocation();
   //const blog = await Blog.findById(req.params.id);
   const id = location.pathname.split("/")[2];
-  console.log(location.pathname);
   const getBlogInfoById = async () => {
     try {
       const response = await fetch(`${BASE_URL}/blogs/${id}`, {

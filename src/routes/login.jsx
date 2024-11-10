@@ -52,7 +52,7 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Log in to Airbnb</h2>
+        <h2>Log in to DogPaws</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Email</label>
