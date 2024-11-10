@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../common";
 
 const NewBlogCreation = ({ categories, setIsModalOpen }) => {
   const navigate = useNavigate();
@@ -13,28 +14,31 @@ const NewBlogCreation = ({ categories, setIsModalOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:9000/blogs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        token: localStorage.getItem("token"),
-      },
-      body: JSON.stringify(newBlog),
-    });
-
-    if (response.status === 200) {
-      const data = await response.json();
-      setIsModalOpen(false); // Close modal after successful blog creation
-      setNewBlog({
-        title: "",
-        description: "",
-        link: "",
-        category: categories[0].name, // Reset to default category
+    try {
+      const response = await fetch(`${BASE_URL}/blogs`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(newBlog),
       });
-    } else if (response.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("name");
-      navigate("/login");
+      if (response.status === 201) {
+        setIsModalOpen(false); // Close modal after successful blog creation
+        setNewBlog({
+          title: "",
+          description: "",
+          link: "",
+          category: categories[0].name, // Reset to default category
+        });
+      } else if (response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        navigate("/login");
+      }
+    } catch (error) {
+    } finally {
+      setIsModalOpen(false);
     }
   };
   return (
