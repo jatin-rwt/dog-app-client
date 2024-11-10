@@ -181,3 +181,11 @@
 .main-content {
   margin-top: 100px; /* Adjust this value depending on your header's height */
 }
+
+.category-select {
+  padding: 10px;  /* Adjust the padding here */
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 5px; /* Adjust margin if needed */
+  margin-left: 5px;
+}

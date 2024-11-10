@@ -84,6 +84,7 @@ const NewBlogCreation = ({ categories, setIsModalOpen }) => {
             <label>
               Category:
               <select
+                className="category-select"
                 value={newBlog.category}
                 onChange={(e) =>
                   setNewBlog({ ...newBlog, category: e.target.value })
