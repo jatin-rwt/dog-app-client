@@ -78,7 +78,7 @@ const LoginPage = () => {
         </form>
         <div className="additional-options">
           <p>
-            Don’t have an account? <a href="#signup">Sign up</a>
+            Don't have an account? <a href="#signup">Sign up</a>
           </p>
           <p>
             <a href="#forgot-password">Forgot password?</a>
