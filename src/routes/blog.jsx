@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./blog.css";
+import { BASE_URL } from "../common";
 
 const Blog = () => {
   const [blog, setBlog] = useState(null);
@@ -11,7 +12,7 @@ const Blog = () => {
   console.log(location.pathname);
   const getBlogInfoById = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/blogs/${id}`, {
+      const response = await fetch(`${BASE_URL}/blogs/${id}`, {
         headers: {
           token: localStorage.getItem("token"),
         },
@@ -43,9 +44,7 @@ const Blog = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="blog-link"
-            >
-              
-            </a>
+            ></a>
             <p className="blog-email">Posted by: {blog.email}</p>
           </div>
         ) : (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../common";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const LoginPage = () => {
     e.preventDefault();
     // Handle login logic here
     try {
-      const response = await fetch("http://localhost:9000/login", {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

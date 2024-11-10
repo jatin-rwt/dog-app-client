@@ -6,6 +6,7 @@ import Blogs from "../component/Blogs";
 
 import { useNavigate } from "react-router-dom";
 import NewBlogCreation from "../component/NewBlogCreation";
+import { BASE_URL } from "../common";
 
 const BlogsPage = () => {
   // Sample categories and blog
@@ -43,14 +44,11 @@ const BlogsPage = () => {
 
   const handleFetchBlogsByCategory = async (category) => {
     try {
-      const response = await fetch(
-        `http://localhost:9000/blogs?category=${category}`,
-        {
-          headers: {
-            token: localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/blogs?category=${category}`, {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
       if (response.status === 200) {
         const data = await response.json();
         setBlogs(data.data);
