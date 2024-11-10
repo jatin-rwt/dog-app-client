@@ -3,13 +3,16 @@ import CategoryTabs from "../component/Categories";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./blogs.css";
 import Blogs from "../component/Blogs";
+
 import { useNavigate } from "react-router-dom";
+import NewBlogCreation from "../component/NewBlogCreation";
 
 const BlogsPage = () => {
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-  const [blogs, setBlogs] = useState([]);
   // Sample categories and blog
   const navigate = useNavigate();
+
+  const userName = localStorage.getItem("name") ?? "Guest";
+
   const categories = [
     { name: "NEW_PARENT", icon: "fa-paw", label: "New Parent" },
     {
@@ -34,6 +37,10 @@ const BlogsPage = () => {
     },
   ];
 
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [blogs, setBlogs] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleFetchBlogsByCategory = async (category) => {
     try {
       const response = await fetch(
@@ -56,12 +63,46 @@ const BlogsPage = () => {
     }
   };
 
-  console.log(blogs);
   useEffect(() => {
     handleFetchBlogsByCategory(categories[selectedCategoryIndex].name);
   }, [selectedCategoryIndex]);
+
   return (
     <div className="blogs-page">
+      <header className="top-header">
+        <div className="header-content">
+          <button
+            className="new-blog-button"
+            onClick={() => setIsModalOpen(true)}
+          >
+            New Blog
+          </button>
+
+          <div className="user-info">
+            <div
+              // Default profile picture if not available
+              alt="Profile"
+              className="profile-icon"
+            >
+              {userName.split("")[0]?.toUpperCase()}
+            </div>
+            <span className="user-name">{userName}</span>
+          </div>
+          {/* <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button> */}
+        </div>
+      </header>
+
+      <div>
+        {isModalOpen && (
+          <NewBlogCreation
+            categories={categories}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+      </div>
+
       <h1>Explore Blogs</h1>
       <CategoryTabs
         categories={categories}

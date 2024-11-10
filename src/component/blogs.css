@@ -6,6 +6,9 @@
   min-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
 .blog-item {
   display: flex;
   flex-direction: column;
@@ -63,5 +66,6 @@
 
   .blog-item p {
     font-size: 1.1rem;
+    text-decoration: none;
   }
 }

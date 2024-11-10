@@ -32,7 +32,8 @@ const LoginPage = () => {
       if (response.ok) {
         // Assuming the server returns a JWT token on successful login
         const token = data.token;
-        localStorage.setItem("token", token); // Store token in localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", data.name); // Store token in localStorage
         console.log("Logged in successfully");
         navigate("/blogs");
         // Redirect or update UI based on the successful login
